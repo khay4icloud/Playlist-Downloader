@@ -1,0 +1,319 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6B20AAD91F3050250011DCEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B20AAD81F3050250011DCEA /* main.m */; };
+		6B20AADC1F3050250011DCEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B20AADB1F3050250011DCEA /* AppDelegate.m */; };
+		6B20AADF1F3050250011DCEA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B20AADE1F3050250011DCEA /* ViewController.m */; };
+		6B20AAE21F3050250011DCEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B20AAE01F3050250011DCEA /* Main.storyboard */; };
+		6B20AAE41F3050250011DCEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B20AAE31F3050250011DCEA /* Assets.xcassets */; };
+		6B20AAE71F3050250011DCEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B20AAE51F3050250011DCEA /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6B20AAD41F3050250011DCEA /* Playlist Downloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Playlist Downloader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B20AAD81F3050250011DCEA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6B20AADA1F3050250011DCEA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6B20AADB1F3050250011DCEA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6B20AADD1F3050250011DCEA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		6B20AADE1F3050250011DCEA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6B20AAE11F3050250011DCEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6B20AAE31F3050250011DCEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6B20AAE61F3050250011DCEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6B20AAE81F3050250011DCEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6B20AAD11F3050250011DCEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6B20AACB1F3050250011DCEA = {
+			isa = PBXGroup;
+			children = (
+				6B20AAD61F3050250011DCEA /* Playlist Downloader */,
+				6B20AAD51F3050250011DCEA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6B20AAD51F3050250011DCEA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6B20AAD41F3050250011DCEA /* Playlist Downloader.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6B20AAD61F3050250011DCEA /* Playlist Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				6B20AADA1F3050250011DCEA /* AppDelegate.h */,
+				6B20AADB1F3050250011DCEA /* AppDelegate.m */,
+				6B20AADD1F3050250011DCEA /* ViewController.h */,
+				6B20AADE1F3050250011DCEA /* ViewController.m */,
+				6B20AAE01F3050250011DCEA /* Main.storyboard */,
+				6B20AAE31F3050250011DCEA /* Assets.xcassets */,
+				6B20AAE51F3050250011DCEA /* LaunchScreen.storyboard */,
+				6B20AAE81F3050250011DCEA /* Info.plist */,
+				6B20AAD71F3050250011DCEA /* Supporting Files */,
+			);
+			path = "Playlist Downloader";
+			sourceTree = "<group>";
+		};
+		6B20AAD71F3050250011DCEA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6B20AAD81F3050250011DCEA /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6B20AAD31F3050250011DCEA /* Playlist Downloader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B20AAEB1F3050250011DCEA /* Build configuration list for PBXNativeTarget "Playlist Downloader" */;
+			buildPhases = (
+				6B20AAD01F3050250011DCEA /* Sources */,
+				6B20AAD11F3050250011DCEA /* Frameworks */,
+				6B20AAD21F3050250011DCEA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Playlist Downloader";
+			productName = "Playlist Downloader";
+			productReference = 6B20AAD41F3050250011DCEA /* Playlist Downloader.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6B20AACC1F3050250011DCEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = KLYN;
+				TargetAttributes = {
+					6B20AAD31F3050250011DCEA = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 57BL24GSG7;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 6B20AACF1F3050250011DCEA /* Build configuration list for PBXProject "Playlist Downloader" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6B20AACB1F3050250011DCEA;
+			productRefGroup = 6B20AAD51F3050250011DCEA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6B20AAD31F3050250011DCEA /* Playlist Downloader */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6B20AAD21F3050250011DCEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B20AAE71F3050250011DCEA /* LaunchScreen.storyboard in Resources */,
+				6B20AAE41F3050250011DCEA /* Assets.xcassets in Resources */,
+				6B20AAE21F3050250011DCEA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6B20AAD01F3050250011DCEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B20AADF1F3050250011DCEA /* ViewController.m in Sources */,
+				6B20AADC1F3050250011DCEA /* AppDelegate.m in Sources */,
+				6B20AAD91F3050250011DCEA /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6B20AAE01F3050250011DCEA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B20AAE11F3050250011DCEA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6B20AAE51F3050250011DCEA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6B20AAE61F3050250011DCEA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6B20AAE91F3050250011DCEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6B20AAEA1F3050250011DCEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6B20AAEC1F3050250011DCEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 57BL24GSG7;
+				INFOPLIST_FILE = "Playlist Downloader/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.veer.Playlist-Downloader";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6B20AAED1F3050250011DCEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 57BL24GSG7;
+				INFOPLIST_FILE = "Playlist Downloader/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.veer.Playlist-Downloader";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6B20AACF1F3050250011DCEA /* Build configuration list for PBXProject "Playlist Downloader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B20AAE91F3050250011DCEA /* Debug */,
+				6B20AAEA1F3050250011DCEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6B20AAEB1F3050250011DCEA /* Build configuration list for PBXNativeTarget "Playlist Downloader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B20AAEC1F3050250011DCEA /* Debug */,
+				6B20AAED1F3050250011DCEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6B20AACC1F3050250011DCEA /* Project object */;
+}
