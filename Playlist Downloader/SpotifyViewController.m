@@ -6,12 +6,15 @@
 //  Copyright © 2017 KLYN. All rights reserved.
 //
 
+#define kClientId "db50dd31f39341848da9ba2bf7312cc5"
+#define kCallbackURL "playlist-downloader://"
 #define kBaseAuthorize @"https://accounts.spotify.com/authorize"
-
 
 #import "SpotifyViewController.h"
 
 @interface SpotifyViewController ()
+
+@property (atomic, readwrite) BOOL firstLoad;
 
 @end
 
@@ -19,14 +22,61 @@
 
 @synthesize authWebView;
 
+#pragma mark - View Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self clearLocalCookies];
+
+    self.firstLoad = YES;
     
     authWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     authWebView.delegate = self;
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    SPTAuth *auth = [SPTAuth defaultInstance];
+    // Uncomment to turn off native/SSO/flip-flop login flow
+    //auth.allowNativeLogin = NO;
+    
+    // Check if we have a token at all
+    if (auth.session == nil) {
+        return;
+    }
+    
+    // Check if it's still valid
+    if ([auth.session isValid] && self.firstLoad) {
+        // It's still valid, show the player.
+//        [self showPlayer];
+        return;
+    }
+    
+    // Oh noes, the token has expired, if we have a token refresh service set up, we'll call tat one.
+//    self.statusLabel.text = @"Token expired.";
+    if (auth.hasTokenRefreshService) {
+//        [self renewTokenAndShowPlayer];
+        return;
+    }
+    
+    // Else, just show login dialog
+}
+
+- (void)sessionUpdatedNotification:(NSNotification *)notification
+{
+//    self.statusLabel.text = @"";
+    
+    SPTAuth *auth = [SPTAuth defaultInstance];
+    
+    if (auth.session && [auth.session isValid]) {
+//        self.statusLabel.text = @"";
+//        [self showPlayer];
+        
+        [authWebView setHidden:YES];
+    } else {
+//        self.statusLabel.text = @"Login failed.";
+        NSLog(@"*** Failed to log in");
+    }
 }
 
 - (void)startAuthenticationFlow {
@@ -41,6 +91,18 @@
         // Present in SafariViewController
         [self loadUIWebViewWith:authURL];
     }
+    
+}
+
+#pragma mark - SPTStoreControllerDelegate
+
+- (void)openLoginPage
+{
+//    self.statusLabel.text = @"Logging in...";
+    
+    [authWebView loadRequest:[NSURLRequest requestWithURL:[[SPTAuth defaultInstance] spotifyWebAuthenticationURL]]];
+    self.definesPresentationContext = YES;
+    [self.view addSubview:authWebView];
     
 }
 
@@ -118,9 +180,9 @@ navigationType:(UIWebViewNavigationType)navigationType {
     self.player = [SPTAudioStreamingController sharedInstance];
     
     // The client ID you got from the developer site
-    self.auth.clientID = @"db50dd31f39341848da9ba2bf7312cc5";
+    self.auth.clientID = @kClientId;
     // The redirect URL as you entered in at the developer site
-    self.auth.redirectURL = [NSURL URLWithString:@"playlist-downloader://com.veer.Playlist-Downloader"];
+    self.auth.redirectURL = [NSURL URLWithString:@kCallbackURL];
     // Setting the 'sessionUserDefaultsKey' enables SPTAuth to automatically store the session for future use.
     self.auth.sessionUserDefaultsKey = @"current session";
     // Set the scopes you need the user to authorize. 'SPTAuthStreamingScope' is required for playing audio.
