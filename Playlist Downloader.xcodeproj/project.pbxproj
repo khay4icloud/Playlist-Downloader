@@ -13,6 +13,16 @@
 		6B20AAE21F3050250011DCEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B20AAE01F3050250011DCEA /* Main.storyboard */; };
 		6B20AAE41F3050250011DCEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B20AAE31F3050250011DCEA /* Assets.xcassets */; };
 		6B20AAE71F3050250011DCEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B20AAE51F3050250011DCEA /* LaunchScreen.storyboard */; };
+		6B20AAF01F3058750011DCEA /* mediaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B20AAEF1F3058750011DCEA /* mediaCell.xib */; };
+		6B20AAF31F30596C0011DCEA /* MediaTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B20AAF21F30596C0011DCEA /* MediaTableCell.m */; };
+		6B20AAFA1F3062190011DCEA /* itunes.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B20AAF61F3062190011DCEA /* itunes.png */; };
+		6B20AAFB1F3062190011DCEA /* Pandora.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B20AAF71F3062190011DCEA /* Pandora.jpg */; };
+		6B20AAFC1F3062190011DCEA /* soundCloud.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B20AAF81F3062190011DCEA /* soundCloud.jpg */; };
+		6B20AAFD1F3062190011DCEA /* spotify.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B20AAF91F3062190011DCEA /* spotify.png */; };
+		6B20AB021F3068040011DCEA /* SpotifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B20AB011F3068040011DCEA /* SpotifyViewController.m */; };
+		6B20AB061F3075DE0011DCEA /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B20AB041F3075DE0011DCEA /* SpotifyAudioPlayback.framework */; };
+		6B20AB071F3075DE0011DCEA /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B20AB051F3075DE0011DCEA /* SpotifyAuthentication.framework */; };
+		6B20AB0A1F3076D60011DCEA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B20AB091F3076D60011DCEA /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +36,18 @@
 		6B20AAE31F3050250011DCEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B20AAE61F3050250011DCEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B20AAE81F3050250011DCEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B20AAEF1F3058750011DCEA /* mediaCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mediaCell.xib; sourceTree = "<group>"; };
+		6B20AAF11F30596C0011DCEA /* MediaTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaTableCell.h; sourceTree = "<group>"; };
+		6B20AAF21F30596C0011DCEA /* MediaTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaTableCell.m; sourceTree = "<group>"; };
+		6B20AAF61F3062190011DCEA /* itunes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = itunes.png; path = ../../../../Downloads/itunes.png; sourceTree = "<group>"; };
+		6B20AAF71F3062190011DCEA /* Pandora.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Pandora.jpg; path = ../../../../Downloads/Pandora.jpg; sourceTree = "<group>"; };
+		6B20AAF81F3062190011DCEA /* soundCloud.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = soundCloud.jpg; path = ../../../../Downloads/soundCloud.jpg; sourceTree = "<group>"; };
+		6B20AAF91F3062190011DCEA /* spotify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spotify.png; path = ../../../../Downloads/spotify.png; sourceTree = "<group>"; };
+		6B20AB001F3068040011DCEA /* SpotifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotifyViewController.h; sourceTree = "<group>"; };
+		6B20AB011F3068040011DCEA /* SpotifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotifyViewController.m; sourceTree = "<group>"; };
+		6B20AB041F3075DE0011DCEA /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAudioPlayback.framework; path = "../../../../Downloads/ios-sdk-beta-25/SpotifyAudioPlayback.framework"; sourceTree = "<group>"; };
+		6B20AB051F3075DE0011DCEA /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAuthentication.framework; path = "../../../../Downloads/ios-sdk-beta-25/SpotifyAuthentication.framework"; sourceTree = "<group>"; };
+		6B20AB091F3076D60011DCEA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +55,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B20AB0A1F3076D60011DCEA /* AVFoundation.framework in Frameworks */,
+				6B20AB061F3075DE0011DCEA /* SpotifyAudioPlayback.framework in Frameworks */,
+				6B20AB071F3075DE0011DCEA /* SpotifyAuthentication.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +69,7 @@
 			children = (
 				6B20AAD61F3050250011DCEA /* Playlist Downloader */,
 				6B20AAD51F3050250011DCEA /* Products */,
+				6B20AB081F3076D50011DCEA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,14 +84,11 @@
 		6B20AAD61F3050250011DCEA /* Playlist Downloader */ = {
 			isa = PBXGroup;
 			children = (
-				6B20AADA1F3050250011DCEA /* AppDelegate.h */,
-				6B20AADB1F3050250011DCEA /* AppDelegate.m */,
-				6B20AADD1F3050250011DCEA /* ViewController.h */,
-				6B20AADE1F3050250011DCEA /* ViewController.m */,
+				6B20AAFF1F3064280011DCEA /* MediaClass */,
+				6B20AAF41F305E8B0011DCEA /* MediaTable */,
+				6B20AAEE1F30584E0011DCEA /* MediaCell */,
 				6B20AAE01F3050250011DCEA /* Main.storyboard */,
 				6B20AAE31F3050250011DCEA /* Assets.xcassets */,
-				6B20AAE51F3050250011DCEA /* LaunchScreen.storyboard */,
-				6B20AAE81F3050250011DCEA /* Info.plist */,
 				6B20AAD71F3050250011DCEA /* Supporting Files */,
 			);
 			path = "Playlist Downloader";
@@ -74,9 +97,79 @@
 		6B20AAD71F3050250011DCEA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6B20AAD81F3050250011DCEA /* main.m */,
+				6B20AB031F3075A90011DCEA /* Frameworks */,
+				6B20AAFE1F3062340011DCEA /* ProjectFiles */,
+				6B20AAF51F305ED70011DCEA /* MediaLogos */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6B20AAEE1F30584E0011DCEA /* MediaCell */ = {
+			isa = PBXGroup;
+			children = (
+				6B20AAEF1F3058750011DCEA /* mediaCell.xib */,
+				6B20AAF11F30596C0011DCEA /* MediaTableCell.h */,
+				6B20AAF21F30596C0011DCEA /* MediaTableCell.m */,
+			);
+			name = MediaCell;
+			sourceTree = "<group>";
+		};
+		6B20AAF41F305E8B0011DCEA /* MediaTable */ = {
+			isa = PBXGroup;
+			children = (
+				6B20AADD1F3050250011DCEA /* ViewController.h */,
+				6B20AADE1F3050250011DCEA /* ViewController.m */,
+			);
+			name = MediaTable;
+			sourceTree = "<group>";
+		};
+		6B20AAF51F305ED70011DCEA /* MediaLogos */ = {
+			isa = PBXGroup;
+			children = (
+				6B20AAF61F3062190011DCEA /* itunes.png */,
+				6B20AAF71F3062190011DCEA /* Pandora.jpg */,
+				6B20AAF81F3062190011DCEA /* soundCloud.jpg */,
+				6B20AAF91F3062190011DCEA /* spotify.png */,
+			);
+			name = MediaLogos;
+			sourceTree = "<group>";
+		};
+		6B20AAFE1F3062340011DCEA /* ProjectFiles */ = {
+			isa = PBXGroup;
+			children = (
+				6B20AADA1F3050250011DCEA /* AppDelegate.h */,
+				6B20AADB1F3050250011DCEA /* AppDelegate.m */,
+				6B20AAE81F3050250011DCEA /* Info.plist */,
+				6B20AAE51F3050250011DCEA /* LaunchScreen.storyboard */,
+				6B20AAD81F3050250011DCEA /* main.m */,
+			);
+			name = ProjectFiles;
+			sourceTree = "<group>";
+		};
+		6B20AAFF1F3064280011DCEA /* MediaClass */ = {
+			isa = PBXGroup;
+			children = (
+				6B20AB001F3068040011DCEA /* SpotifyViewController.h */,
+				6B20AB011F3068040011DCEA /* SpotifyViewController.m */,
+			);
+			name = MediaClass;
+			sourceTree = "<group>";
+		};
+		6B20AB031F3075A90011DCEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6B20AB041F3075DE0011DCEA /* SpotifyAudioPlayback.framework */,
+				6B20AB051F3075DE0011DCEA /* SpotifyAuthentication.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6B20AB081F3076D50011DCEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6B20AB091F3076D60011DCEA /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +233,12 @@
 			files = (
 				6B20AAE71F3050250011DCEA /* LaunchScreen.storyboard in Resources */,
 				6B20AAE41F3050250011DCEA /* Assets.xcassets in Resources */,
+				6B20AAFA1F3062190011DCEA /* itunes.png in Resources */,
+				6B20AAF01F3058750011DCEA /* mediaCell.xib in Resources */,
+				6B20AAFD1F3062190011DCEA /* spotify.png in Resources */,
 				6B20AAE21F3050250011DCEA /* Main.storyboard in Resources */,
+				6B20AAFB1F3062190011DCEA /* Pandora.jpg in Resources */,
+				6B20AAFC1F3062190011DCEA /* soundCloud.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +251,9 @@
 			files = (
 				6B20AADF1F3050250011DCEA /* ViewController.m in Sources */,
 				6B20AADC1F3050250011DCEA /* AppDelegate.m in Sources */,
+				6B20AB021F3068040011DCEA /* SpotifyViewController.m in Sources */,
 				6B20AAD91F3050250011DCEA /* main.m in Sources */,
+				6B20AAF31F30596C0011DCEA /* MediaTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,10 +374,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 57BL24GSG7;
+				FRAMEWORK_SEARCH_PATHS = "/Users/Kal_Yan/gitDir_mgr/repoFiles/Playlist\\ Downloader/Playlist\\ Downloader";
 				INFOPLIST_FILE = "Playlist Downloader/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.veer.Playlist-Downloader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "/Users/Kal_Yan/gitDir_mgr/repoFiles/Playlist\\ Downloader/Playlist\\ Downloader";
 			};
 			name = Debug;
 		};
@@ -286,10 +388,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 57BL24GSG7;
+				FRAMEWORK_SEARCH_PATHS = "/Users/Kal_Yan/gitDir_mgr/repoFiles/Playlist\\ Downloader/Playlist\\ Downloader";
 				INFOPLIST_FILE = "Playlist Downloader/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.veer.Playlist-Downloader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "/Users/Kal_Yan/gitDir_mgr/repoFiles/Playlist\\ Downloader/Playlist\\ Downloader";
 			};
 			name = Release;
 		};
