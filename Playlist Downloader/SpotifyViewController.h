@@ -17,14 +17,12 @@
     
 }
 
-
 @property (nonatomic, strong) SPTAuth *auth;
 @property (nonatomic, strong) SPTAudioStreamingController *player;
-@property (nonatomic, strong) UIViewController *authViewController;
 @property (nonatomic, strong) UIWebView *authWebView;
 
-@property (weak, nonatomic) IBOutlet UITextField *usernameField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+
 
 - (IBAction)playListButton:(id)sender;
 - (IBAction)backButton:(id)sender;
