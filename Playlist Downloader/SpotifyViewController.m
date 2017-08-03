@@ -20,7 +20,11 @@
 
 @end
 
-@implementation SpotifyViewController
+@implementation SpotifyViewController {
+    NSMutableData *responseData;
+}
+
+
 
 #pragma mark - View Lifecycle
 
@@ -95,25 +99,73 @@ navigationType:(UIWebViewNavigationType)navigationType {
             [self.auth handleAuthCallbackWithTriggeredAuthURL:request.URL callback:^(NSError *error, SPTSession *session) {
                 if (session) {
                     // Request Playlist
-                    NSURLRequest *playlistrequest = [SPTPlaylistList createRequestForGettingPlaylistsForUser:session.canonicalUsername
-                                                                                             withAccessToken:session.accessToken
-                                                                                                       error:nil];
+                    NSString *spotifyAPIEndpoint = @"https://api.spotify.com/v1";
+                    NSString *spotifyPlaylistList = [NSString stringWithFormat:@"%@/users/%@/playlists -H \"Authorization: Bearer %@\"",
+                                                     spotifyAPIEndpoint, session.canonicalUsername, session.accessToken];
+                    NSURL *spotifyPlaylistURL = [NSURL URLWithString:spotifyPlaylistList];
                     
-                    [[SPTRequest sharedHandler] performRequest:playlistrequest
-                                                      callback:^(NSError *error, NSURLResponse *response, NSData *data) {
-                        if (error != nil) {
-                            NSLog(@"*** failed to play: %@", error.description);
-                            return ;
+                    // Create the request.
+                    NSURLRequest *spotifyPlaylistRequest = [NSURLRequest requestWithURL:spotifyPlaylistURL];
+                    
+//                    // Create url connection and fire request
+//                    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+                    
+                    //create the Method "GET"
+//                    [spotifyPlaylistRequest ];
+                    
+                    NSURLSession *session = [NSURLSession sharedSession];
+                    
+                    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:spotifyPlaylistRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                    {
+                        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                        if(httpResponse.statusCode == 200)
+                        {
+                            NSError *parseError = nil;
+                            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+                            NSLog(@"The response is - %@",responseDictionary);
                         }
-                        SPTPlaylistList *playlists = [SPTPlaylistList playlistListFromData:data withResponse:response error:nil];
-                        NSLog(@"Got possan's playlists, first page: %@", playlists);
-                        }];
+                        else
+                        {
+                            NSLog(@"Error");     
+                        }
+                    }];
+                    
                 }
             }];
             return YES;
         }
         return NO;
     }
+}
+
+#pragma mark - NSURLConnection Delegate Methods
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    
+    
+    
+    responseData = [[NSMutableData alloc] init];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    
+    
+    
+    [responseData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+    // The request is complete and data has been received
+    // You can parse the stuff in your instance variable now
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    
+    // The request has failed for some reason!
+    // Check the error var
+    
 }
 
 - (void)loadUIWebViewWith: (NSURL *)currentURL {

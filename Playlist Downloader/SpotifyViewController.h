@@ -12,10 +12,7 @@
 #import <SpotifyMetadata/SpotifyMetadata.h>
 #import <SafariServices/SafariServices.h>
 
-@interface SpotifyViewController : UIViewController <SPTAudioStreamingDelegate, UIWebViewDelegate>
-{
-    
-}
+@interface SpotifyViewController : UIViewController <SPTAudioStreamingDelegate, UIWebViewDelegate, NSURLConnectionDataDelegate>
 
 @property (nonatomic, strong) SPTAuth *auth;
 @property (nonatomic, strong) SPTAudioStreamingController *player;
