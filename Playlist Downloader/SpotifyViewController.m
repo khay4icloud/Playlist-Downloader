@@ -7,10 +7,12 @@
 //
 
 #define kClientId "db50dd31f39341848da9ba2bf7312cc5"
-#define kCallbackURL "playlist-downloader://"
+#define kRedirectURL "playlist-downloader://com.veer.Playlist-Downloader"
 #define kBaseAuthorize @"https://accounts.spotify.com/authorize"
+#define kCurrentUserPlaylists @"https://api.spotify.com/v1/me/playlists"
 
 #import "SpotifyViewController.h"
+
 
 @interface SpotifyViewController ()
 
@@ -21,14 +23,17 @@
 @implementation SpotifyViewController
 
 @synthesize authWebView;
+@synthesize usernameField;
+
 
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.firstLoad = YES;
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionUpdatedNotification:) name:@"sessionUpdated" object:nil];
     
+    self.firstLoad = YES;
     authWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     authWebView.delegate = self;
     
@@ -67,10 +72,13 @@
 //    self.statusLabel.text = @"";
     
     SPTAuth *auth = [SPTAuth defaultInstance];
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
     
     if (auth.session && [auth.session isValid]) {
 //        self.statusLabel.text = @"";
 //        [self showPlayer];
+        
+        
         
         [authWebView setHidden:YES];
     } else {
@@ -79,7 +87,8 @@
     }
 }
 
-- (void)startAuthenticationFlow {
+- (void)startAuthenticationFlow
+{
     
     // Check if we can use the access token we already have
     if ([self.auth.session isValid]) {
@@ -90,6 +99,9 @@
         NSURL *authURL = [self.auth spotifyWebAuthenticationURL];
         // Present in SafariViewController
         [self loadUIWebViewWith:authURL];
+//        self.authViewController = [[SFSafariViewController alloc] initWithURL:authURL];
+//        self.definesPresentationContext = YES;
+//        [self presentViewController:self.authViewController animated:YES completion:nil];
     }
     
 }
@@ -106,10 +118,6 @@
     
 }
 
--(void)webViewDidStartLoad:(UIWebView *)webView {
-    
-    NSLog(@"Start request");
-}
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
 navigationType:(UIWebViewNavigationType)navigationType {
     
@@ -126,9 +134,21 @@ navigationType:(UIWebViewNavigationType)navigationType {
             // Parse the incoming url to a session object
             [self.auth handleAuthCallbackWithTriggeredAuthURL:request.URL callback:^(NSError *error, SPTSession *session) {
                 if (session) {
-                    // login to the player
-                    [self.player loginWithAccessToken:self.auth.session.accessToken];
-                    [self clearLocalCookies];
+                    // Request Playlist
+                    
+                    NSURLRequest *playlistrequest = [SPTPlaylistList createRequestForGettingPlaylistsForUser:session.canonicalUsername
+                                                                                             withAccessToken:session.accessToken
+                                                                                                       error:nil];
+                    
+                    [[SPTRequest sharedHandler] performRequest:playlistrequest
+                                                      callback:^(NSError *error, NSURLResponse *response, NSData *data) {
+                        if (error != nil) {
+                            NSLog(@"*** failed to play: %@", error.description);
+                            return ;
+                        }
+                        SPTPlaylistList *playlists = [SPTPlaylistList playlistListFromData:data withResponse:response error:nil];
+                        NSLog(@"Got possan's playlists, first page: %@", playlists);
+                        }];
                 }
             }];
             return YES;
@@ -182,14 +202,12 @@ navigationType:(UIWebViewNavigationType)navigationType {
     // The client ID you got from the developer site
     self.auth.clientID = @kClientId;
     // The redirect URL as you entered in at the developer site
-    self.auth.redirectURL = [NSURL URLWithString:@kCallbackURL];
+    self.auth.redirectURL = [NSURL URLWithString:@kRedirectURL];
     // Setting the 'sessionUserDefaultsKey' enables SPTAuth to automatically store the session for future use.
     self.auth.sessionUserDefaultsKey = @"current session";
-    // Set the scopes you need the user to authorize. 'SPTAuthStreamingScope' is required for playing audio.
-    self.auth.requestedScopes = @[SPTAuthStreamingScope];
-    
-    // Become the streaming contorller delegate
-    self.player.delegate = self;
+    // Set the scopes you need the user to authorize. 'SPTAuthPlaylistReadCollaborativeScope' lets you read users collaborative playlists.
+    self.auth.requestedScopes = @[SPTAuthPlaylistReadCollaborativeScope];
+
     
     // Start up the streaming contoller.
     NSError *audioStreamingInitError;

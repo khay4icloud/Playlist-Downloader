@@ -23,6 +23,7 @@
 		6B20AB061F3075DE0011DCEA /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B20AB041F3075DE0011DCEA /* SpotifyAudioPlayback.framework */; };
 		6B20AB071F3075DE0011DCEA /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B20AB051F3075DE0011DCEA /* SpotifyAuthentication.framework */; };
 		6B20AB0A1F3076D60011DCEA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B20AB091F3076D60011DCEA /* AVFoundation.framework */; };
+		6B2840361F32B216007B094B /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2840351F32B216007B094B /* SpotifyMetadata.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		6B20AB041F3075DE0011DCEA /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAudioPlayback.framework; path = "../../../../Downloads/ios-sdk-beta-25/SpotifyAudioPlayback.framework"; sourceTree = "<group>"; };
 		6B20AB051F3075DE0011DCEA /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAuthentication.framework; path = "../../../../Downloads/ios-sdk-beta-25/SpotifyAuthentication.framework"; sourceTree = "<group>"; };
 		6B20AB091F3076D60011DCEA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		6B2840351F32B216007B094B /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyMetadata.framework; path = "../../../../Downloads/ios-sdk-beta-25/SpotifyMetadata.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B2840361F32B216007B094B /* SpotifyMetadata.framework in Frameworks */,
 				6B20AB0A1F3076D60011DCEA /* AVFoundation.framework in Frameworks */,
 				6B20AB061F3075DE0011DCEA /* SpotifyAudioPlayback.framework in Frameworks */,
 				6B20AB071F3075DE0011DCEA /* SpotifyAuthentication.framework in Frameworks */,
@@ -158,6 +161,7 @@
 		6B20AB031F3075A90011DCEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6B2840351F32B216007B094B /* SpotifyMetadata.framework */,
 				6B20AB041F3075DE0011DCEA /* SpotifyAudioPlayback.framework */,
 				6B20AB051F3075DE0011DCEA /* SpotifyAuthentication.framework */,
 			);
@@ -416,6 +420,7 @@
 				6B20AAED1F3050250011DCEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
