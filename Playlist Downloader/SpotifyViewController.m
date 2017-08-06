@@ -12,6 +12,7 @@
 #define kCurrentUserPlaylists @"https://api.spotify.com/v1/me/playlists"
 
 #import "SpotifyViewController.h"
+#import "SpotifyPlaylist.h"
 
 
 @interface SpotifyViewController ()
@@ -30,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.firstLoad = YES;
 }
 
@@ -38,7 +39,7 @@
     
     SPTAuth *auth = [SPTAuth defaultInstance];
     // Uncomment to turn off native/SSO/flip-flop login flow
-    //auth.allowNativeLogin = NO;
+//    auth.allowNativeLogin = NO;
     
     // Check if we have a token at all
     if (auth.session == nil) {
@@ -67,17 +68,8 @@
     self.authWebView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     self.authWebView.delegate = self;
     
-    // Check if we can use the access token we already have
-    if ([self.auth.session isValid]) {
-        // Use it to log in
-//        [self startLoginFlow];
-    } else {
-        // Get the URL to the Spotify authorization portal
-        NSURL *authURL = [self.auth spotifyWebAuthenticationURL];
-        // Present in SafariViewController
-        [self loadUIWebViewWith:authURL];
-    }
-    
+    NSURL *authURL = [self.auth spotifyWebAuthenticationURL];
+    [self loadUIWebViewWith:authURL];
 }
 
 #pragma mark - SPTStoreControllerDelegate
@@ -95,81 +87,90 @@ navigationType:(UIWebViewNavigationType)navigationType {
         if ([self.auth canHandleURL:request.URL]) {
             // Close the authentication window
             [self.authWebView setHidden:YES];
-            // Parse the incoming url to a session object
-            [self.auth handleAuthCallbackWithTriggeredAuthURL:request.URL callback:^(NSError *error, SPTSession *session) {
-                if (session) {
-                    // Request Playlist
-                    NSString *spotifyAPIEndpoint = @"https://api.spotify.com/v1";
-                    NSString *spotifyPlaylistList = [NSString stringWithFormat:@"%@/users/%@/playlists -H \"Authorization: Bearer %@\"",
-                                                     spotifyAPIEndpoint, session.canonicalUsername, session.accessToken];
-                    NSURL *spotifyPlaylistURL = [NSURL URLWithString:spotifyPlaylistList];
-                    
-                    // Create the request.
-                    NSURLRequest *spotifyPlaylistRequest = [NSURLRequest requestWithURL:spotifyPlaylistURL];
-                    
-//                    // Create url connection and fire request
-//                    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-                    
-                    //create the Method "GET"
-//                    [spotifyPlaylistRequest ];
-                    
-                    NSURLSession *session = [NSURLSession sharedSession];
-                    
-                    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:spotifyPlaylistRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-                    {
-                        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                        if(httpResponse.statusCode == 200)
-                        {
-                            NSError *parseError = nil;
-                            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-                            NSLog(@"The response is - %@",responseDictionary);
-                        }
-                        else
-                        {
-                            NSLog(@"Error");     
-                        }
-                    }];
-                    
-                }
-            }];
+            
+            [self retrivePlaylistHREFWithRequest:request];
+            
             return YES;
         }
         return NO;
     }
 }
 
-#pragma mark - NSURLConnection Delegate Methods
+- (void)retrivePlaylistHREFWithRequest:(NSURLRequest *)request {
+    
+     __block NSMutableDictionary *playlistTrackHREF = [[NSMutableDictionary alloc] init];
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    // Parse the incoming url to a session object
+    [self.auth handleAuthCallbackWithTriggeredAuthURL:request.URL callback:^(NSError *error, SPTSession *session) {
+        if (session) {
+            
+            // Request Playlist
+            
+            NSLog(@"User: %@", session.canonicalUsername);
+            NSLog(@"AccessToken: %@", session.accessToken);
+            
+            // Create URL.
+            NSString *spotifyAPIEndpoint = @"https://api.spotify.com/v1";
+            NSString *spotifyPlaylistList = [NSString stringWithFormat:@"%@/users/%@/playlists", spotifyAPIEndpoint, session.canonicalUsername];
+            NSString *spotifyWebURLString = [spotifyPlaylistList stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+            NSURL *spotifyPlaylistURL = [NSURL URLWithString:spotifyWebURLString];
+            
+            // Create the request.
+            NSMutableURLRequest *spotifyPlaylistRequest = [[NSMutableURLRequest alloc] initWithURL:spotifyPlaylistURL];
+            [spotifyPlaylistRequest setValue:[NSString stringWithFormat:@"Bearer %@",session.accessToken]
+                          forHTTPHeaderField:@"Authorization"];
+            NSLog(@"Spotify URL: %@",spotifyPlaylistRequest);
+            
+            NSURLSession *session = [NSURLSession sharedSession];
+            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:spotifyPlaylistRequest
+                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                            
+                                                            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                                            if (httpResponse.statusCode == 200) {
+                                                                NSError *parseError = nil;
+                                                                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+                                                                NSLog(@"The response is - %@",responseDictionary);
+                                                                
+                                                                playlistTrackHREF = [responseDictionary mutableCopy];
+                                                            }
+                                                            else {
+                                                                NSLog(@"Error");
+                                                            }
+                                                            
+                                                            [self playlistTrackHRefsFromDictionary:playlistTrackHREF];
+                                                        }];
+            
+            [dataTask resume];
+        }
+    }];
     
-    
-    
-    responseData = [[NSMutableData alloc] init];
+    NSLog(@"The Playlist Track - %@", playlistTrackHREF);
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+- (void)playlistTrackHRefsFromDictionary:(NSMutableDictionary *)dictionary {
+    NSLog(@"The Playlist Track - %@", dictionary);
     
+    NSArray *playlistItems = dictionary[@"items"];
     
-    
-    [responseData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
-    // The request is complete and data has been received
-    // You can parse the stuff in your instance variable now
-    
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    
-    // The request has failed for some reason!
-    // Check the error var
+    for (int i=0; i<playlistItems.count; i++) {
+        [playlistItems objectAtIndex:i];
+    }
     
 }
 
 - (void)loadUIWebViewWith: (NSURL *)currentURL {
    
+
+//    self.authViewController = [[SFSafariViewController alloc] initWithURL:currentURL];
+//    self.definesPresentationContext = YES;
+//    [self presentViewController:self.authViewController animated:YES completion:nil];
+    
+//    self.authViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    self.authViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+//    self.definesPresentationContext = YES;
+//    [self presentViewController:self.authViewController animated:NO completion:nil];
+    
     [self.authWebView loadRequest:[NSURLRequest requestWithURL:currentURL]];
     [self.view addSubview:self.authWebView];
 }
@@ -182,18 +183,12 @@ navigationType:(UIWebViewNavigationType)navigationType {
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark - MemoryWarning
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - UIAction
 
 - (IBAction)playListButton:(id)sender {
     
     self.auth = [SPTAuth defaultInstance];
+    
     self.player = [SPTAudioStreamingController sharedInstance];
     
     // The client ID you got from the developer site
@@ -205,11 +200,6 @@ navigationType:(UIWebViewNavigationType)navigationType {
     // Set the scopes you need the user to authorize. 'SPTAuthPlaylistReadCollaborativeScope' lets you read users collaborative playlists.
     self.auth.requestedScopes = @[SPTAuthPlaylistReadCollaborativeScope];
 
-    
-    // Start up the streaming contoller.
-    NSError *audioStreamingInitError;
-    NSAssert([self.player startWithClientId:self.auth.clientID error:&audioStreamingInitError], @"There was a problem streaming the Spotify SDK: %@", audioStreamingInitError.description);
-    
     // Start authentication when the app is finished launching
     dispatch_async(dispatch_get_main_queue(), ^{
         [self startAuthenticationFlow];
@@ -219,4 +209,31 @@ navigationType:(UIWebViewNavigationType)navigationType {
 - (IBAction)backButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - SPTAuthViewDelegate
+
+- (void) authenticationViewController:(SFSafariViewController *)authenticationViewController didLoginWithSession:(SPTSession *)session {
+    NSLog(@"Login Successfully");
+}
+
+- (void) authenticationViewController:(SFSafariViewController *)authenticationViewController didFailToLogin:(NSError *)error {
+    NSLog(@"Login Failed");
+}
+
+- (void) authenticationViewControllerDidCancelLogin:(SFSafariViewController *)authenticationViewController {
+    NSLog(@"Login Cancelled");
+}
+
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
+    
+}
+
+
+#pragma mark - MemoryWarning
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 @end
