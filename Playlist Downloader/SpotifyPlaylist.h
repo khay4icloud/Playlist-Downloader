@@ -10,24 +10,15 @@
 
 @interface SpotifyPlaylist : NSObject
 
-@property (nonatomic, strong) NSArray *playlistsArray;
-@property (nonatomic, strong) NSMutableDictionary *playlistDetialsDictionary;
-@property (nonatomic, strong) NSMutableDictionary *playlistDetials;
-@property (nonatomic, strong) NSString *playlistName;
-
-
-@property (nonatomic, strong) NSArray *tracksArray;
-@property (nonatomic, strong) NSMutableDictionary *trackDetialsDictionary;
-@property (nonatomic, strong) NSMutableDictionary *tracksDetails;
-@property (nonatomic, strong) NSString *trackName;
-
-
 @property (nonatomic, strong) NSString *albumName;
-@property (nonatomic, strong) NSArray *artistNamesArray;
+@property (nonatomic, strong) NSString *artistName;
+@property (nonatomic, strong) NSMutableDictionary *trackDetails;
+@property (nonatomic, strong) NSString *trackName;
+@property (nonatomic, strong) NSMutableDictionary *tracksDictionary;
+@property (nonatomic, strong) NSMutableArray *tracksArray;
 
-- (instancetype) initWithPlaylistName: (NSArray *)playlistName
-                         trackName: (NSString *)trackName
-                         albumName: (NSString *)albumName
-                    andArtistNames: (NSArray *) artistNames;
+@property (nonatomic, strong) NSString *playlistName;
+@property (nonatomic, strong) NSMutableDictionary *playlistDetials;
+@property (nonatomic, strong) NSMutableArray *playlistsArray;
 
 @end

@@ -10,72 +10,44 @@
 
 @implementation SpotifyPlaylist
 
-//- (instancetype) initWithPlaylistName:(NSArray *)playlistName
-//                            trackName:(NSString *)trackName
-//                            albumName:(NSString *)albumName
-//                       andArtistNames:(NSArray *)artistNames {
-//    self = [super init];
-//    
-//    if (self) {
-//        self.playlistName = playlistName;
-//        self.trackName = trackName;
-//        self.albumName = albumName;
-//        self.artistNames = artistNames;
-//    }
-//    
-//    return self;
-//}
-
-//- (instancetype) initWithPlaylist:(NSArray *)playlistArray {
-//    
-//    
-//    [self initWithPlaylistDetialsWithName:self.playlistName];
-//}
-//
-//-(NSMutableDictionary *) initWithPlaylistDetialsWithName:(NSString *)playlistName {
-//    
-//    self.playlistDetialsDictionary = [[NSMutableDictionary alloc] init];
-//    [self.playlistDetialsDictionary setValue:playlistName
-//                            forKey:@"playlistName"];
-//    [self.playlistDetialsDictionary setValue:self.playlistDetials
-//                            forKey:@"playlistDetials"];
-//    
-//    [self initWithTrackDetials:self.trackName];
-//}
-//
-//-(NSMutableDictionary *) initWithTrackDetials:(NSString *)trackName {
-//    
-//    self.trackDetialsDictionary = [[NSMutableDictionary alloc] init];
-//    
-//    [self.trackDetialsDictionary setValue:trackName
-//                                    forKey:@"trackName"];
-//    [self.trackDetialsDictionary setValue:self.tracksDetails
-//                                   forKey:@"trackDetials"];
-//    
-//    [self initWithTrackWith:self.albumName andArtistName:self.artistNamesArray];
-//}
-//
-//-(NSMutableDictionary *) initWithTrackWith:(NSString *)albumName
-//                             andArtistName:(NSArray *)artistName  {
-//    
-//    self = [super init];
-//    
-//    self.tracksDetails = [[NSMutableDictionary alloc] init];
-//    
-//    [self.tracksDetails setValue:albumName
-//                                    forKey:@"albumName"];
-//    [self.tracksDetails setValue:artistName
-//                                   forKey:@"artistNames"];
-//    
-//    return self;
-//}
-
--(instancetype) initWithTitle:(NSString *)aTitle date:(NSDate *)aDate {
+-(instancetype) init {
+    self = [super init];
     
-    if (self = [super init]) {
-        title = [aTitle copy];
-    }
+    self.tracksArray = [[NSMutableArray alloc] init];
+    self.playlistsArray = [[NSMutableArray alloc] init];
     
+    return self;
+}
+
+-(void) addAlbumName:(NSString *)albumName
+          ArtistName:(NSString *)artistName
+        forTrackName:(NSString *)trackName {
+    
+    self.albumName = albumName;
+    self.artistName = artistName;
+    
+    self.trackDetails = [[NSMutableDictionary alloc] init];
+    [self.trackDetails setValue:self.albumName forKey:@"albumName"];
+    [self.trackDetails setValue:self.artistName forKey:@"artistName"];
+    
+    self.trackName = trackName;
+    
+    self.tracksDictionary = [[NSMutableDictionary alloc] init];
+    [self.tracksDictionary setValue:trackName forKey:@"trackName"];
+    [self.tracksDictionary setValue:self.trackDetails forKey:@"trackDetials"];
+    
+    [self.tracksArray addObject:self.tracksDictionary];
+}
+
+-(void) addTracksToPlaylistWithName:(NSString *)playlistName {
+    
+    self.playlistName = playlistName;
+    
+    self.playlistDetials = [[NSMutableDictionary alloc] init];
+    [self.playlistDetials setValue:self.playlistName forKey:@"playlistName"];
+    [self.playlistDetials setValue:self.tracksArray forKey:@"tracks"];
+    
+    [self.playlistsArray addObject:self.playlistDetials];
 }
 
 @end
