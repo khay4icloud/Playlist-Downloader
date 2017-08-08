@@ -33,8 +33,8 @@
     self.trackName = trackName;
     
     self.tracksDictionary = [[NSMutableDictionary alloc] init];
-    [self.tracksDictionary setValue:trackName forKey:@"trackName"];
     [self.tracksDictionary setValue:self.trackDetails forKey:@"trackDetials"];
+    [self.tracksDictionary setValue:trackName forKey:@"trackName"];
     
     [self.tracksArray addObject:self.tracksDictionary];
 }

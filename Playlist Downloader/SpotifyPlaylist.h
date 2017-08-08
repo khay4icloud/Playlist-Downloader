@@ -21,4 +21,10 @@
 @property (nonatomic, strong) NSMutableDictionary *playlistDetials;
 @property (nonatomic, strong) NSMutableArray *playlistsArray;
 
+-(void) addAlbumName:(NSString *)albumName
+          ArtistName:(NSString *)artistName
+        forTrackName:(NSString *)trackName;
+
+-(void) addTracksToPlaylistWithName:(NSString *)playlistName;
+
 @end

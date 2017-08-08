@@ -20,6 +20,7 @@
 @property (nonatomic, strong) SPTAudioStreamingController *player;
 @property (nonatomic, strong) UIViewController *authViewController;
 @property (nonatomic, strong) UIWebView *authWebView;
+@property NSString *accessToken;
 
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 

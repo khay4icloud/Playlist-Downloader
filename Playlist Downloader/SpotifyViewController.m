@@ -21,11 +21,7 @@
 
 @end
 
-@implementation SpotifyViewController {
-    NSMutableData *responseData;
-}
-
-
+@implementation SpotifyViewController
 
 #pragma mark - View Lifecycle
 
@@ -77,7 +73,7 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
 navigationType:(UIWebViewNavigationType)navigationType {
     
-    NSLog(@"Request: %@",request);
+//    NSLog(@"Request: %@",request);
     
     NSString *urlString = request.URL.absoluteString;
     if ([urlString.lowercaseString hasPrefix:kBaseAuthorize]) {
@@ -106,20 +102,18 @@ navigationType:(UIWebViewNavigationType)navigationType {
             
             // Request Playlist
             
-            NSLog(@"User: %@", session.canonicalUsername);
-            NSLog(@"AccessToken: %@", session.accessToken);
+//            NSLog(@"User: %@", session.canonicalUsername);
+//            NSLog(@"AccessToken: %@", session.accessToken);
+            self.accessToken = session.accessToken;
             
             // Create URL.
             NSString *spotifyAPIEndpoint = @"https://api.spotify.com/v1";
             NSString *spotifyPlaylistList = [NSString stringWithFormat:@"%@/users/%@/playlists", spotifyAPIEndpoint, session.canonicalUsername];
             NSString *spotifyWebURLString = [spotifyPlaylistList stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-            NSURL *spotifyPlaylistURL = [NSURL URLWithString:spotifyWebURLString];
             
-            // Create the request.
-            NSMutableURLRequest *spotifyPlaylistRequest = [[NSMutableURLRequest alloc] initWithURL:spotifyPlaylistURL];
-            [spotifyPlaylistRequest setValue:[NSString stringWithFormat:@"Bearer %@",session.accessToken]
-                          forHTTPHeaderField:@"Authorization"];
-            NSLog(@"Spotify URL: %@",spotifyPlaylistRequest);
+            NSMutableURLRequest *spotifyPlaylistRequest = [self constructURLRequestWithURL:spotifyWebURLString andAccessToken:session.accessToken];
+
+//            NSLog(@"Spotify URL: %@",spotifyPlaylistRequest);
             
             NSURLSession *session = [NSURLSession sharedSession];
             NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:spotifyPlaylistRequest
@@ -129,7 +123,7 @@ navigationType:(UIWebViewNavigationType)navigationType {
                                                             if (httpResponse.statusCode == 200) {
                                                                 NSError *parseError = nil;
                                                                 NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-                                                                NSLog(@"The response is - %@",responseDictionary);
+//                                                                NSLog(@"The response is - %@",responseDictionary);
                                                                 
                                                                 playlistTrackHREF = [responseDictionary mutableCopy];
                                                             }
@@ -144,32 +138,60 @@ navigationType:(UIWebViewNavigationType)navigationType {
         }
     }];
     
-    NSLog(@"The Playlist Track - %@", playlistTrackHREF);
+//    NSLog(@"The Playlist Track - %@", playlistTrackHREF);
+}
+
+-(NSMutableURLRequest *) constructURLRequestWithURL:(NSString *)urlString andAccessToken:(NSString *)accessToken {
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:url];
+    [urlRequest setValue:[NSString stringWithFormat:@"Bearer %@",accessToken] forHTTPHeaderField:@"Authorization"];
+    
+    return urlRequest;
 }
 
 - (void)playlistTrackHRefsFromDictionary:(NSMutableDictionary *)dictionary {
-    NSLog(@"The Playlist Track - %@", dictionary);
+//    NSLog(@"The Playlist Track - %@", dictionary);
     
     NSArray *playlistItems = dictionary[@"items"];
     
+    SpotifyPlaylist *SPPlaylists = [[SpotifyPlaylist alloc] init];
+    
     for (int i=0; i<playlistItems.count; i++) {
-        [playlistItems objectAtIndex:i];
+        NSString *trackHREFString = [playlistItems objectAtIndex:i][@"href"];
+
+        NSURLSession *urlSession = [NSURLSession sharedSession];
+        NSMutableURLRequest *trackURLRequest = [self constructURLRequestWithURL:trackHREFString andAccessToken:self.accessToken];
+        
+        NSURLSessionDataTask *dataTask = [urlSession dataTaskWithRequest:trackURLRequest
+                                                       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                           NSDictionary *trackJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                                           NSArray *tracksArray = [[trackJson objectForKey:@"tracks"] objectForKey:@"items"];
+
+                                                           for (int trackCount=0; trackCount<tracksArray.count; trackCount++) {
+                                                               [SPPlaylists addAlbumName:[[[[tracksArray objectAtIndex:trackCount] objectForKey:@"track"] objectForKey:@"album"] objectForKey:@"name"]
+                                                                              ArtistName:[[[[[[tracksArray objectAtIndex:trackCount] objectForKey:@"track"] objectForKey:@"album"] objectForKey:@"artists"] objectAtIndex:0] objectForKey:@"name"]
+                                                                            forTrackName:[[[tracksArray objectAtIndex:trackCount] objectForKey:@"track"] objectForKey:@"name"]];
+                                                               
+                                                           }
+                                                           [SPPlaylists addTracksToPlaylistWithName:[trackJson objectForKey:@"name"]];
+                                                       }];
+        [dataTask resume];
     }
+    
+    NSLog(@"SPPlaylist object:%@", SPPlaylists.playlistsArray);
+    
+    NSData *spJSONData = [NSJSONSerialization dataWithJSONObject:SPPlaylists.playlistsArray
+                                                         options:NSJSONWritingPrettyPrinted
+                                                           error:nil];
+    NSString *spJSONString = [[NSString alloc] initWithData:spJSONData
+                                                   encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"Collected JSON structure: %@", spJSONString);
     
 }
 
 - (void)loadUIWebViewWith: (NSURL *)currentURL {
-   
-
-//    self.authViewController = [[SFSafariViewController alloc] initWithURL:currentURL];
-//    self.definesPresentationContext = YES;
-//    [self presentViewController:self.authViewController animated:YES completion:nil];
-    
-//    self.authViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//    self.authViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//    self.modalPresentationStyle = UIModalPresentationCurrentContext;
-//    self.definesPresentationContext = YES;
-//    [self presentViewController:self.authViewController animated:NO completion:nil];
     
     [self.authWebView loadRequest:[NSURLRequest requestWithURL:currentURL]];
     [self.view addSubview:self.authWebView];
@@ -209,25 +231,6 @@ navigationType:(UIWebViewNavigationType)navigationType {
 - (IBAction)backButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-#pragma mark - SPTAuthViewDelegate
-
-- (void) authenticationViewController:(SFSafariViewController *)authenticationViewController didLoginWithSession:(SPTSession *)session {
-    NSLog(@"Login Successfully");
-}
-
-- (void) authenticationViewController:(SFSafariViewController *)authenticationViewController didFailToLogin:(NSError *)error {
-    NSLog(@"Login Failed");
-}
-
-- (void) authenticationViewControllerDidCancelLogin:(SFSafariViewController *)authenticationViewController {
-    NSLog(@"Login Cancelled");
-}
-
-- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
-    
-}
-
 
 #pragma mark - MemoryWarning
 
